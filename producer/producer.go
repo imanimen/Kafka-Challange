@@ -15,7 +15,7 @@ type Message struct {
 	State string `json:"state"`
 }
 
-func main() {
+func Producer() {
 	// configure the kafka
 	mechanism, err := scram.Mechanism(scram.SHA256,
 		"Z3VpZGVkLWdhemVsbGUtMTE3ODckNB1tfbKadjljFIv71Hm05KJEC1-IzwvmiCM",
@@ -26,20 +26,20 @@ func main() {
 	}
 	w := &kafka.Writer{
 		Addr:  kafka.TCP("guided-gazelle-11787-us1-kafka.upstash.io:9092"),
-		Topic: "kafka-2",
+		Topic: "kafka-final",
 		Transport: &kafka.Transport{
 			SASL: mechanism,
 			TLS:  &tls.Config{},
 		},
 		BatchSize:  10,
-		BatchBytes: int64(100 * time.Millisecond),
+		BatchBytes: int64(10 * time.Millisecond),
 	}
 
 	// define states
 	states := []string{"failed", "completed", "in_progress"}
 
 	// create messages
-	messages := make([]Message, 1000)
+	messages := make([]Message, 10)
 	for i := 0; i < 10; i++ {
 		state := states[i%len(states)]
 		message := Message{
@@ -71,4 +71,8 @@ func main() {
 	if err := w.Close(); err != nil {
 		fmt.Println("Error closing connection:", err)
 	}
+}
+
+func main() {
+	Producer()
 }
