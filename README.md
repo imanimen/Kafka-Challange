@@ -9,3 +9,12 @@ The persistent store now has various messages that are either successful, in pro
 Write a test suite that is able to correctly assert that there was no messages dropped and the messages were correctly parsed into
 each bucket of successful, in progress or failed.
 The system is not static but is a streaming system.
+
+# Run
+1- Clone the kafka-docker-compose
+
+`git clone https://github.com/conduktor/kafka-stack-docker-compose.git`
+
+2- Run the docker compose
+
+`docker-compose -f kafka-stack-docker-compose/zk-single-kafka-single.yml up -d`
