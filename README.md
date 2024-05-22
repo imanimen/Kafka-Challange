@@ -11,3 +11,5 @@ each bucket of successful, in progress or failed.
 The system is not static but is a streaming system.
 
 # Run
+- Producer `go run producer/producer.go`
+- Consumer `go run consumer/consumer.go`
