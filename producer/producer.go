@@ -18,8 +18,8 @@ type Message struct {
 func Producer() {
 	// configure the kafka
 	mechanism, err := scram.Mechanism(scram.SHA256,
-		"Z3VpZGVkLWdhemVsbGUtMTE3ODckNB1tfbKadjljFIv71Hm05KJEC1-IzwvmiCM",
-		"OTQxNmExZTUtNTliYS00MjU5LTkzNGUtYTcyYTJlMjg5MGZh")
+		"temp-username",
+		"temp-password")
 	if err != nil {
 		fmt.Println("Error creating SASL mechanism:", err)
 		return
